@@ -19,6 +19,7 @@ class Controller(QtCore.QObject):
         self.populate_days()
         self.populate_gender()
         self.view.buttonBelgium.setChecked(True)
+        self.view.pushButtonGenerate.clicked.connect(self.view_snapshot)
 
     def populate_years(self):
         self.yearsList = [str(x) for x in list(range(1900, 2021, 1))]
@@ -38,3 +39,12 @@ class Controller(QtCore.QObject):
     def populate_gender(self):
         self.gendersList = ['Male', 'Female']
         self.view.comboBoxGender.addItems(self.gendersList)
+
+    def view_snapshot(self):
+        self.selectedYear = self.view.comboBoxYear.currentText()
+        self.selectedMonth = self.view.comboBoxMonth.currentText()
+        self.selectedDay = self.view.comboBoxDay.currentText()
+        self.selectedGender = self.view.comboBoxGender.currentText()
+        return self.selectedYear, self.selectedMonth, self.selectedDay, self.selectedGender
+
+
