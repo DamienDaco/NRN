@@ -1,5 +1,6 @@
 from PyQt6 import QtCore
 from ui.nrn import *
+from app.nrn_generators import *
 
 
 class Controller(QtCore.QObject):
@@ -19,7 +20,8 @@ class Controller(QtCore.QObject):
         self.populate_days()
         self.populate_gender()
         self.view.buttonBelgium.setChecked(True)
-        self.view.pushButtonGenerate.clicked.connect(self.view_snapshot)
+        self.view.pushButtonGenerate.clicked.connect(self.generate_from_date)
+        self.view.lineEditGenerator.setReadOnly(True)
 
     def populate_years(self):
         self.yearsList = [str(x) for x in list(range(1900, 2021, 1))]
@@ -46,5 +48,11 @@ class Controller(QtCore.QObject):
         self.selectedDay = self.view.comboBoxDay.currentText()
         self.selectedGender = self.view.comboBoxGender.currentText()
         return self.selectedYear, self.selectedMonth, self.selectedDay, self.selectedGender
+
+    def generate_from_date(self):
+        w, x, y, z = self.view_snapshot()
+        self.gen = NrnBelgiumGenerateFromDate(w, x, y, z)
+        self.view.lineEditGenerator.setText(self.gen.nrn)
+        self.view.lineEditGenerator.hasSelectedText()
 
 
