@@ -1,4 +1,5 @@
 from PyQt6 import QtCore
+from PyQt6 import QtWidgets
 from ui.nrn import *
 from app.nrn_generators import *
 
@@ -22,6 +23,7 @@ class Controller(QtCore.QObject):
         self.view.buttonBelgium.setChecked(True)
         self.view.pushButtonGenerate.clicked.connect(self.generate_from_date)
         self.view.lineEditGenerator.setReadOnly(True)
+        self.view.pushButtonCopyToClipBoard.clicked.connect(self.copy_to_clipboard)
 
     def populate_years(self):
         self.yearsList = [str(x) for x in list(range(1900, 2021, 1))]
@@ -55,4 +57,8 @@ class Controller(QtCore.QObject):
         self.view.lineEditGenerator.setText(self.gen.nrn)
         self.view.lineEditGenerator.hasSelectedText()
 
+    def copy_to_clipboard(self):
+        self.currentText = self.view.lineEditGenerator.text()
+        print(self.currentText)
+        QtWidgets.QApplication.clipboard().setText(self.currentText)
 
