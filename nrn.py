@@ -1,5 +1,6 @@
 import sys
 from ui.nrn import *
+from app.controller import *
 from PyQt6 import QtWidgets
 
 
@@ -13,7 +14,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
     my_app = MainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(my_app)
+    ui = Controller(my_app)
     my_app.show()
     sys.exit(app.exec())
