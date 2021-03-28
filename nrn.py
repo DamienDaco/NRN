@@ -1,5 +1,4 @@
 import sys
-from ui.nrn import *
 from app.controller import *
 from PyQt6 import QtWidgets
 

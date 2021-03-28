@@ -1,5 +1,3 @@
-from PyQt6 import QtCore
-from PyQt6 import QtWidgets
 from ui.nrn import *
 from app.nrn_generators import *
 
